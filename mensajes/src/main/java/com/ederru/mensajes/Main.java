@@ -20,8 +20,8 @@ public class Main {
             System.out.println("Aplicación de mensajes");
             System.out.println("1. Crear mensaje");
             System.out.println("2. Listar mensajes");
-            System.out.println("3. Editar memnsaje");
-            System.out.println("4. Elminar mensaje");
+            System.out.println("3. Eliminar memnsaje");
+            System.out.println("4. Editar mensaje");
             System.out.println("5. Salir");
             
             //leemos la entrada del usuario

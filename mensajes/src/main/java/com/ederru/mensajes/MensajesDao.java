@@ -1,6 +1,7 @@
 
 package com.ederru.mensajes;
 
+import java.lang.reflect.Array;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -66,11 +67,51 @@ public class MensajesDao {
     }
     
     public static void borrarMensajeDB(int id_mensaje) {
+        Conexion db_connect = new Conexion();
         
+        try (Connection conexion = db_connect.get_Connection()){
+            PreparedStatement p = null;
+            
+            try {
+                String query = "DELETE FROM mensajes WHERE ID_MENSAJE = ? ";
+                p = conexion.prepareStatement(query);
+                p.setInt(1, id_mensaje);
+                p.executeUpdate();
+                System.out.println("Mensaje Eliminado");
+            } catch (SQLException e) {
+                System.out.println(e);
+                System.out.println("Mensaje no eliminado");
+            }
+            
+            
+        } catch (SQLException e) {
+            
+            System.out.println(e);
+        }
     }
     
     public static void actualizarMensajeDB(Mensajes mensaje) {
+        Conexion db_connect = new Conexion();
         
+        try (Connection conexion = db_connect.get_Connection()){
+            PreparedStatement p = null;
+            
+            try {
+                String query = "UPDATE mensajes SET MENSAJE = ? WHERE ID_MENSAJE = ? ";
+                p = conexion.prepareStatement(query);
+                p.setString(1, mensaje.getMensaje());
+                p.setInt(2, mensaje.getId_mensaje());
+                p.executeUpdate();
+                System.out.println("Mensaje se atualizó correctamente");
+            } catch (SQLException e) {
+                System.out.println(e);
+                System.out.println("Falla al actualizar");
+            }
+            
+        } catch (SQLException e) {
+            
+            System.out.println(e);
+        }
     }
     
 }
